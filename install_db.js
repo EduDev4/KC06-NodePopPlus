@@ -8,6 +8,7 @@ const db = require('./lib/connectMongoose');
 
 // Cargamos las definiciones de todos nuestros modelos
 const Anuncio = require('./models/Anuncio');
+const Usuario = require('./models/Usuario');
 
 db.once('open', async function () {
   try {
@@ -16,7 +17,8 @@ db.once('open', async function () {
       
       // Inicializar nuestros modelos
       await initAnuncios();
-      
+      await initUsuarios();
+
     } else {
       console.log('DB install aborted!');
     }
@@ -53,4 +55,17 @@ async function initAnuncios() {
 
   return numLoaded;
 
+}
+
+async function initUsuarios() {
+  // borrar documentos existentes de la colección
+  console.log('Vaciando colección de usuarios...');
+  await Usuario.remove({});
+
+  // cargar los documentos iniciales
+  console.log('Cargando usuarios...');
+  const result = await Usuario.insertMany([
+    { email: 'sample_user@example.com', password: await Usuario.hashPassword('qwerty') }   
+  ]);
+  console.log(`Se han creado ${result.length} usuarios.`);
 }

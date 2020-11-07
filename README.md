@@ -43,7 +43,6 @@ To start in development mode:
 
 ## API v1 info
 
-
 ### Base Path
 
 The API can be used with the path:
@@ -113,3 +112,18 @@ Return the list of available tags for the resource anuncios.
         "mobile"
       ]
     }
+
+## API v2 info
+
+### POST /apiv2/loginJWT
+
+  **Input Query**:
+  email: {string}
+  password: {string}
+
+**Result:**
+
+    {
+        "tokenJWT": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmE3MGNmZTQyNWU5NjMwY2M5N2JlZDYiLCJpYXQiOjE2MDQ3ODU0NTksImV4cCI6MTYwNDk1ODI1OX0.QKgMFVNRlw0o00Ja22mCTyYbLoaUjlgUpuloeOHNkwU"
+    }
+
