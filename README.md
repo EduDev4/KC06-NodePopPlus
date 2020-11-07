@@ -13,6 +13,10 @@ Api for the iOS/Android apps.
 
 ### Configure  
 
+Install mongodb and run an instance (i.e):
+    
+    "C:\Program Files\MongoDB\Server\4.4\bin\mongod.exe" --dbpath .\data\db
+
 Review lib/connectMongoose.js to set database configuration
 
 ### Init database
