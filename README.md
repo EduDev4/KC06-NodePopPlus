@@ -113,24 +113,26 @@ Return the list of available tags for the resource anuncios.
       ]
     }
 
-## API v2 info
+## API v2 info  
 
-### POST /apiv2/authenticate
+### POST /apiv2/authenticate  
 
-  **Input Query:**
-  email: {string}
-  password: {string}
+  **Input Query:**  
+  
+  email: {string}  
+  password: {string}  
 
-**Result:**
+**Result:**  
 
     {
         "tokenJWT": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmE3MGNmZTQyNWU5NjMwY2M5N2JlZDYiLCJpYXQiOjE2MDQ3ODU0NTksImV4cCI6MTYwNDk1ODI1OX0.QKgMFVNRlw0o00Ja22mCTyYbLoaUjlgUpuloeOHNkwU"
     }
 
-### GET /apiv2/anuncios
+### GET /apiv2/anuncios  
 
   **Input Query:**
-  /[Required/] Authenticate: {string} (Token JWT)
+
+  [Required] Authenticate: {string} (Token JWT)
 
 **Result:**
 
