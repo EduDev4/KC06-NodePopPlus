@@ -41,6 +41,131 @@ To start in development mode:
 
     npm run hints
 
+
+# API v2 info  
+
+    API V2 es la versión 2 de la API relacionada con la práctica de Backend Avanzado
+
+### POST /apiv2/authenticate  
+
+**Input Body:** 
+
+  email: {string}  
+  password: {string}  
+
+**Result:**  
+
+    {
+        "tokenJWT": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmE3MGNmZTQyNWU5NjMwY2M5N2JlZDYiLCJpYXQiOjE2MDQ3ODU0NTksImV4cCI6MTYwNDk1ODI1OX0.QKgMFVNRlw0o00Ja22mCTyYbLoaUjlgUpuloeOHNkwU"
+    }
+
+    - Token will expire in 5min after JWT was created
+
+### GET /apiv2/anuncios  
+
+**Input Header:**
+
+  Authorization: {string} (Token JWT)
+
+**Result if expired:**
+
+    {
+    "success": false,
+    "error": "jwt expired"
+    }
+
+**Result if invalid:**
+
+    {
+      "success": false,
+      "error": "invalid token"
+    }
+
+**Result OK:**
+
+    {
+        "ok": true,
+        "result": {
+            "rows": [
+                {
+                    "_id": "5fa7164f75ab594540bebd41",
+                    "nombre": "Bicicleta",
+                    "venta": true,
+                    "precio": 23015,
+                    "foto": "\\images\\anuncios\\bici.jpg",
+                    "__v": 0,
+                    "tags": [
+                        "lifestyle",
+                        "motor"
+                    ]
+                },
+                {
+                    "_id": "5fa7164f75ab594540bebd42",
+                    "nombre": "iPhone 3GS",
+                    "venta": false,
+                    "precio": 5000,
+                    "foto": "\\images\\anuncios\\iphone.png",
+                    "__v": 0,
+                    "tags": [
+                        "lifestyle",
+                        "mobile"
+                    ]
+                }
+            ]
+        }
+    }
+
+### GET /change-locale/{locale}
+
+    Given 'en' or 'es' will change locale in user's cookie. The website will reload and i18n will retrieve the updated locale from cookie.
+
+**Example:**
+
+    GET /change-locale/en
+
+**Result:**
+
+  Change Cookie locale value and reloads the site
+
+
+### POST /upload
+
+**Input Query**:
+
+    id: {string} id del anuncio 
+
+**Input Body**:
+    
+    image: {file}
+
+**Input Header**:
+
+    Authorization: {string} (Token JWT)
+
+**Result:**
+
+    You have uploaded this image: <br> <img src="public\images\ad_5fa7164f75ab594540bebd42_images.jpg" width="500">  (We created this thumbnail: thumbnail_ad_5fa7164f75ab594540bebd42_images.jpg)
+
+### GET /anuncios/tags
+
+ **Input Header:**
+
+  Authorization: {string} (Token JWT)
+
+Return the list of available tags for the resource anuncios.
+
+**Result:** 
+
+    {
+      "ok": true,
+      "allowed_tags": [
+        "work",
+        "lifestyle",
+        "motor",
+        "mobile"
+      ]
+    }
+
 ## API v1 info
 
 ### Base Path
@@ -113,86 +238,3 @@ Return the list of available tags for the resource anuncios.
         "mobile"
       ]
     }
-
-## API v2 info  
-
-### POST /apiv2/authenticate  
-
-  **Input Query:**  
-
-  email: {string}  
-  password: {string}  
-
-**Result:**  
-
-    {
-        "tokenJWT": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmE3MGNmZTQyNWU5NjMwY2M5N2JlZDYiLCJpYXQiOjE2MDQ3ODU0NTksImV4cCI6MTYwNDk1ODI1OX0.QKgMFVNRlw0o00Ja22mCTyYbLoaUjlgUpuloeOHNkwU"
-    }
-
-    - Token will expire in 5min after JWT was created
-
-### GET /apiv2/anuncios  
-
-  **Input Query:**
-
-  [Required] Authenticate: {string} (Token JWT)
-
-**Result if expired:**
-
-    {
-    "success": false,
-    "error": "jwt expired"
-    }
-
-**Result if invalid:**
-
-    {
-      "success": false,
-      "error": "invalid token"
-    }
-
-**Result OK:**
-
-    {
-        "ok": true,
-        "result": {
-            "rows": [
-                {
-                    "_id": "5fa7164f75ab594540bebd41",
-                    "nombre": "Bicicleta",
-                    "venta": true,
-                    "precio": 23015,
-                    "foto": "\\images\\anuncios\\bici.jpg",
-                    "__v": 0,
-                    "tags": [
-                        "lifestyle",
-                        "motor"
-                    ]
-                },
-                {
-                    "_id": "5fa7164f75ab594540bebd42",
-                    "nombre": "iPhone 3GS",
-                    "venta": false,
-                    "precio": 5000,
-                    "foto": "\\images\\anuncios\\iphone.png",
-                    "__v": 0,
-                    "tags": [
-                        "lifestyle",
-                        "mobile"
-                    ]
-                }
-            ]
-        }
-    }
-
-### GET /change-locale/{locale}
-
-    Given 'en' or 'es' will change locale in user's cookie. The website will reload and i18n will retrieve the updated locale from cookie.
-
-  **Example:**
-
-  GET /change-locale/en
-
-  **Result:**
-
-  Change Cookie locale value and reloads the site

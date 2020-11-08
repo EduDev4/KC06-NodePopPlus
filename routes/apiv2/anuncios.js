@@ -51,16 +51,14 @@ router.post('/upload',  (req, res) => {
       }
 
       // Display uploaded image for user validation
-      res.send(`You have uploaded this image: <br> <img src="${req.file.path}" width="500">`);
+      res.send(`You have uploaded this image: <br> <img src="${req.file.path}" width="500">  (We created this thumbnail: ${thumbnail})`);
 
       const id = req.query.id;
     
-      const anuncio = await Anuncio.findById(id);
-      console.log(anuncio);
+      const anuncio = await Anuncio.findById(id);      
       anuncio.thumbnail=thumbnail;
       anuncio.foto=thumbnail.replace("thumbnail_","");
-      anuncio.save();
-      console.log(anuncio);
+      anuncio.save();      
 
   });
 
