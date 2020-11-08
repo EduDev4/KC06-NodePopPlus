@@ -129,13 +129,29 @@ Return the list of available tags for the resource anuncios.
         "tokenJWT": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmE3MGNmZTQyNWU5NjMwY2M5N2JlZDYiLCJpYXQiOjE2MDQ3ODU0NTksImV4cCI6MTYwNDk1ODI1OX0.QKgMFVNRlw0o00Ja22mCTyYbLoaUjlgUpuloeOHNkwU"
     }
 
+    - Token will expire in 5min after JWT was created
+
 ### GET /apiv2/anuncios  
 
   **Input Query:**
 
   [Required] Authenticate: {string} (Token JWT)
 
-**Result:**
+**Result if expired:**
+
+    {
+    "success": false,
+    "error": "jwt expired"
+    }
+
+**Result if invalid:**
+
+    {
+      "success": false,
+      "error": "invalid token"
+    }
+
+**Result OK:**
 
     {
         "ok": true,
