@@ -45,8 +45,9 @@ To start in development mode:
 
 ### Base Path
 
-The API can be used with the path:
-[API V1](/apiv1/anuncios)
+The API can be used with the path:  
+Practica Backend -> [API V1](/apiv1/anuncios)  
+Práctica Backend Avanzado -> [API V2](/apiv2/anuncios)  
 
 ### Error example
 
@@ -62,14 +63,14 @@ The API can be used with the path:
 
 **Input Query**:
 
-start: {int} skip records
-limit: {int} limit to records
-sort: {string} field name to sort by
-includeTotal: {bool} whether to include the count of total records without filters
-tag: {string} tag name to filter
-venta: {bool} filter by venta or not
-precio: {range} filter by price range, examples 10-90, -90, 10-
-nombre: {string} filter names beginning with the string
+start: {int} skip records  
+limit: {int} limit to records  
+sort: {string} field name to sort by  
+includeTotal: {bool} whether to include the count of total records without filters  
+tag: {string} tag name to filter  
+venta: {bool} filter by venta or not  
+precio: {range} filter by price range, examples 10-90, -90, 10-  
+nombre: {string} filter names beginning with the string  
 
 Input query example: ?start=0&limit=2&sort=precio&includeTotal=true&tag=mobile&venta=true&precio=-90&nombre=bi
 
@@ -118,7 +119,7 @@ Return the list of available tags for the resource anuncios.
 ### POST /apiv2/authenticate  
 
   **Input Query:**  
-  
+
   email: {string}  
   password: {string}  
 
