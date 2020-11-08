@@ -11,6 +11,7 @@ const anuncioSchema = mongoose.Schema({
   venta: { type: Boolean, index: true },
   precio: { type: Number, index: true },
   foto: String,
+  thumbnail: String,
   tags: { type: [String], index: true }
 });
 
@@ -71,9 +72,6 @@ anuncioSchema.statics.list = async function(filters, startRow, numRows, sortFiel
   }
   result.rows = await query.exec();
 
-  // poner ruta base a imagenes
-  const ruta = configAnuncios.imagesURLBasePath;
-  result.rows.forEach(r => r.foto = r.foto ? path.join(ruta, r.foto) : null );
 
   if (cb) return cb(null, result); // si me dan callback devuelvo los resultados por ahí
   return result; // si no, los devuelvo por la promesa del async (async está en la primera linea de esta función)

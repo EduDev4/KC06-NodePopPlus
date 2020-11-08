@@ -8,23 +8,34 @@ const Anuncio = mongoose.model('Anuncio');
 
 const multer = require('multer');
 
-const storage = multer.diskStorage({
-  destination: function( req, file, cb) {
-    cb(null, 'public/images/');
-  },
-  filename: function(req, file, cb) {
-    const myFilename = `ad_${file.fieldname}_${Date.now()}_${file.originalname}`;
-    cb(null, myFilename);
-  }
-});
-const upload = multer({ storage: storage });
+
 
 // Subir imagen
 router.post('/upload',  (req, res) => {
+  
+  const storage = multer.diskStorage({
+    destination: function( req, file, cb) {
+      cb(null, 'public/images/');
+    },
+    filename: function(req, file, cb) {
+      const myFilename = `ad_${req.query.id}_${file.originalname}`;
+      cb(null, myFilename);
+    }
+  });
+
   console.log("Pin");
   let upload = multer({ storage: storage }).single('image');
 
-  upload(req, res, function(err) {
+  upload(req, res, async function(err) {
+      const sharp = require('sharp');
+      const thumbnail = `thumbnail_ad_${req.query.id}_${req.file.originalname}`;
+      sharp(req.file.path).resize(50, 50).toFile('public/images/' + `${thumbnail}`, (err, resizeImage) => {
+              if (err) {
+                    console.log(err);
+              } else {
+                    console.log(resizeImage);
+              }
+      }); 
 
       if (req.fileValidationError) {
           return res.send(req.fileValidationError);
@@ -41,7 +52,21 @@ router.post('/upload',  (req, res) => {
 
       // Display uploaded image for user validation
       res.send(`You have uploaded this image: <br> <img src="${req.file.path}" width="500">`);
+
+      const id = req.query.id;
+    
+      const anuncio = await Anuncio.findById(id);
+      console.log(anuncio);
+      anuncio.thumbnail=thumbnail;
+      anuncio.foto=thumbnail.replace("thumbnail_","");
+      anuncio.save();
+      console.log(anuncio);
+
   });
+
+
+
+
 });
 
 
