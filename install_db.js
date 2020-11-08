@@ -65,7 +65,7 @@ async function initUsuarios() {
   // cargar los documentos iniciales
   console.log('Cargando usuarios...');
   const result = await Usuario.insertMany([
-    { email: 'sample_user@example.com', password: await Usuario.hashPassword('qwerty') }   
+    { email: 'user@example.com', password: await Usuario.hashPassword('1234') }   
   ]);
   console.log(`Se han creado ${result.length} usuarios.`);
 }

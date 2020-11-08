@@ -18,7 +18,7 @@ class LoginController {
   }
 
     /**
-   * POST /apiv2/loginJWT
+   * POST /apiv2/authenticate
    */
   async postJWT(req, res, next) {
     try {
@@ -43,7 +43,7 @@ class LoginController {
       // si el usuario existe y la password es correcta
 
       // crear un JWT
-      jwt.sign({ _id: usuario._id }, process.env.JWT_SECRET, { expiresIn: '2d'}, (err, tokenJWT) => {
+      jwt.sign({ _id: usuario._id}, process.env.JWT_SECRET, { expiresIn: '2d'}, (err, tokenJWT) => {
         if (err) return next(err);
 
         // responder

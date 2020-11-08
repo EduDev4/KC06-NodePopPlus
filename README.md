@@ -115,9 +115,9 @@ Return the list of available tags for the resource anuncios.
 
 ## API v2 info
 
-### POST /apiv2/loginJWT
+### POST /apiv2/authenticate
 
-  **Input Query**:
+  **Input Query:**
   email: {string}
   password: {string}
 
@@ -127,3 +127,41 @@ Return the list of available tags for the resource anuncios.
         "tokenJWT": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmE3MGNmZTQyNWU5NjMwY2M5N2JlZDYiLCJpYXQiOjE2MDQ3ODU0NTksImV4cCI6MTYwNDk1ODI1OX0.QKgMFVNRlw0o00Ja22mCTyYbLoaUjlgUpuloeOHNkwU"
     }
 
+### GET /apiv2/anuncios
+
+  **Input Query:**
+  /[Required/] Authenticate: {string} (Token JWT)
+
+**Result:**
+
+    {
+        "ok": true,
+        "result": {
+            "rows": [
+                {
+                    "_id": "5fa7164f75ab594540bebd41",
+                    "nombre": "Bicicleta",
+                    "venta": true,
+                    "precio": 23015,
+                    "foto": "\\images\\anuncios\\bici.jpg",
+                    "__v": 0,
+                    "tags": [
+                        "lifestyle",
+                        "motor"
+                    ]
+                },
+                {
+                    "_id": "5fa7164f75ab594540bebd42",
+                    "nombre": "iPhone 3GS",
+                    "venta": false,
+                    "precio": 5000,
+                    "foto": "\\images\\anuncios\\iphone.png",
+                    "__v": 0,
+                    "tags": [
+                        "lifestyle",
+                        "mobile"
+                    ]
+                }
+            ]
+        }
+    }

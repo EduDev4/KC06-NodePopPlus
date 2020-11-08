@@ -39,7 +39,7 @@ app.use('/anuncios', require('./routes/anuncios'));
 app.use('/apiv1/anuncios', require('./routes/apiv1/anuncios'));
 
 //API v2 - implementamos JWT
-app.post('/apiv2/loginJWT', loginController.postJWT);
+app.post('/apiv2/authenticate', loginController.postJWT);
 app.use('/apiv2/anuncios', jwtAuth(), require('./routes/apiv2/anuncios'));
 
 // catch 404 and forward to error handler
