@@ -44,7 +44,16 @@ To start in development mode:
 
 # API v2 info  
 
-    API V2 es la versión 2 de la API relacionada con la práctica de Backend Avanzado
+    API V2 es la versión 2 de la API relacionada con la práctica de Backend Avanzado  
+    - Se crea autenticación de la API con JWT. Metodo authenticate para generar el Token.  
+    - El token es requerido en el Header para obtener respuestas de la API.  
+    - Sin token se responde error 401  
+    - Si el token está caducado se responde error 401  
+    - Interncionalización con i18n. Dos idiomas, inglés y español.  
+    - Se crea selector de idioma en el fron-end que funciona llamando a la ruta /change-locale la cual renueva el valor en la cookie y recarga la página.  
+    - Subida de imagen, creación de Thumbnail y asociación de ambas imagenes al anuncio para mostrarla actualizada en el front-end.
+    - Utilizado Sharp para la creación del thumbnail.
+    
 
 ### POST /apiv2/authenticate  
 
