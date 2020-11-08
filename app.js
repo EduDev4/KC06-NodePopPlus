@@ -12,6 +12,7 @@ const jwtAuth = require('./lib/jwtAuth');
 const db = require('./lib/connectMongoose');
 /* jshint ignore:end */
 
+
 // Cargamos las definiciones de todos nuestros modelos
 require('./models/Anuncio');
 require('./models/Usuario');
@@ -27,6 +28,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//Iniciamos middelware para locales
+const i18n = require('./lib/i18nConfig');
+app.use(i18n.init);
+app.use('/change-locale', require('./routes/change-locale'));
 
 // Global Template variables
 app.locals.title = 'NodePop';

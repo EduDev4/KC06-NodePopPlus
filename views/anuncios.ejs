@@ -6,11 +6,17 @@
   </div>
 </div>
 
+
 <div class="container">
+  <%= __("Select Language") %> : 
+  <% getLocales().forEach((locale, index, array) => { %>
+    <a href="/change-locale/<%= locale %>"><%= locale %></a> <% if (index !== (array.length -1)) { %> | <% } else { %> <br><br> <% } %>
+  <% }) %>
+  
   <div class="row">
     <div class="col-md-12">
-      <h1>Lista de anuncios</h1>
-      <p class="lead">Listando: <%= anuncios.length %> de <%= total %></p>
+      <h1><%= __("Advertisements List") %></h1>
+      <p class="lead"><%= __("List") %>: <%= anuncios.length %> <%= __("of") %> <%= total %></p>
     </div>
   </div>
 
@@ -18,18 +24,18 @@
     <div class="col-md-12">
       <table class="table table-hover">
         <thead><tr>
-          <th>Nombre</th>
-          <th>Venta</th>
-          <th style="text-align: right">Precio</th>
-          <th>Foto</th>
-          <th>Tags</th>
+          <th><%= __("Name") %></th>
+          <th><%= __("Sell") %></th>
+          <th style="text-align: right"><%= __("Price") %></th>
+          <th><%= __("Photo") %></th>
+          <th><%= __("Tags") %></th>
           <th>#</th>
         </tr></thead>
         <tbody>
 <% anuncios.forEach(anuncio => { %>
           <tr>
             <td><%= anuncio.nombre %></td>
-            <td><%= anuncio.venta ? 'Si' : 'No' %></td>
+            <td><%= anuncio.venta ? __("Yes") : __("No") %></td>
             <td style="text-align: right"><%= anuncio.precio / 100 %>€</td>
             <td><img src="<%= anuncio.foto %>"></td>
             <td><%= anuncio.tags %></td>
@@ -39,20 +45,20 @@
         </tbody>
       </table>
 
-      <p>Ejemplos:</p>
+      <p><%= __("Examples") %>:</p>
 
       <ul>
-        <li><a href="?">Todos (max. 1000)</a></li>
-        <li><a href="?start=2&limit=2">Paginado</a></li>
-        <li><a href="?sort=precio">Ordenado por precio ascendente</a></li>
-        <li><a href="?sort=-precio">Ordenado por precio descendente</a></li>
-        <li><a href="?tag=mobile">Con tag mobile</a></li>
+        <li><a href="?"><%= __("All") %> (max. 1000)</a></li>
+        <li><a href="?start=2&limit=2"><%= __("Pagination") %></a></li>
+        <li><a href="?sort=precio"><%= __("Sort by price (highest yo lowest)") %></a></li>
+        <li><a href="?sort=-precio"><%= __("Sort by price (lowest to highest)") %></a></li>
+        <li><a href="?tag=mobile"><%= __("With tag mobile") %></a></li>
       </ul>
 
     </div>
   </div>
 
-  <a href="/">Volver a la home</a>
+  <a href="/"><%= __("Back to home") %></a>
 
 </div>
 <% include _footer %>
