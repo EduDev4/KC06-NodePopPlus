@@ -184,3 +184,15 @@ Return the list of available tags for the resource anuncios.
             ]
         }
     }
+
+### GET /change-locale/{locale}
+
+    Given 'en' or 'es' will change locale in user's cookie. The website will reload and i18n will retrieve the updated locale from cookie.
+
+  **Example:**
+
+  GET /change-locale/en
+
+  **Result:**
+
+  Change Cookie locale value and reloads the site
